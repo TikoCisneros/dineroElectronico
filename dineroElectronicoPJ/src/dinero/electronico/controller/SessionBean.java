@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import dinero.electronico.model.manager.ManagerAdmin;
+import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Usuario;
 
 
@@ -81,8 +82,11 @@ public class SessionBean implements Serializable {
 				session.setAlias("root");session.setPass("root");session.setTipousr(mngAdmin.findTipoUSRByID(1));//Administrador
 				System.out.println("Usuario ROOT conectado.");
 			}else{
-				session = mngAdmin.findUserByAliasAndPass(getAlias(), getPass());
-				String rol = session.getTipousr().getTipo().toLowerCase();
+				Cliente cli = mngAdmin.findClienteByAliasAndPass(getAlias(), getPass());
+				session.setNombre(cli.getNombre());session.setApellido(cli.getApellido());
+				session.setAlias(cli.getAlias());session.setPass(cli.getPass());
+				session.setTipousr(cli.getTipousr());
+				String rol = cli.getTipousr().getTipo().toLowerCase();
 				if(rol.equals("administrador")){
 					rsp="/admin/index?faces-redirect=true";
 				}else if(rol.equals("operador")){

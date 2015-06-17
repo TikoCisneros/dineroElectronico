@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Tipousr;
 import dinero.electronico.model.dao.entities.Usuario;
 
@@ -133,6 +134,33 @@ public class ManagerAdmin {
 				throw new Exception("No se encuentra el usuario."); 
 			}
 			Usuario u = listado.get(0);
+			if (u.getPass().equals(pass)) {//MD5 PASS getMD5(pass)
+				return u;
+			}else{
+				throw new Exception("Usuario o contraseña invalidos");
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	
+	/**
+	 * Método que busca un cliente respecto a su nick y contraseña
+	 * @param nick 
+	 * @param pass
+	 * @return Usuario o null
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public Cliente findClienteByAliasAndPass(String alias, String pass)throws Exception{
+		try {
+			List<Cliente> listado = (List<Cliente>) mngDAO.findByParam(Cliente.class, "o.alias", alias, null);
+			if(listado == null || listado.isEmpty()){
+				throw new Exception("No se encuentra el usuario."); 
+			}
+			Cliente u = listado.get(0);
 			if (u.getPass().equals(pass)) {//MD5 PASS getMD5(pass)
 				return u;
 			}else{
