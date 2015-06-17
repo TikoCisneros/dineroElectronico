@@ -3,7 +3,6 @@ package dinero.electronico.model.dao.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -24,8 +23,9 @@ public class Cuenta implements Serializable {
 	private String token;
 
 	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="cuenta")
-	private List<Cliente> clientes;
+	@ManyToOne
+	@JoinColumn(name="cedula")
+	private Cliente cliente;
 
 	public Cuenta() {
 	}
@@ -54,26 +54,12 @@ public class Cuenta implements Serializable {
 		this.token = token;
 	}
 
-	public List<Cliente> getClientes() {
-		return this.clientes;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public Cliente addCliente(Cliente cliente) {
-		getClientes().add(cliente);
-		cliente.setCuenta(this);
-
-		return cliente;
-	}
-
-	public Cliente removeCliente(Cliente cliente) {
-		getClientes().remove(cliente);
-		cliente.setCuenta(null);
-
-		return cliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

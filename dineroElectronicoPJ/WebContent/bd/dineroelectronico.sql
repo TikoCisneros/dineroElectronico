@@ -14,12 +14,12 @@ CREATE SEQUENCE public.sec_transaccion
    INCREMENT 1
    START 1;
 
+ 
 /*==============================================================*/
 /* Table: CLIENTE                                               */
 /*==============================================================*/
 create table CLIENTE (
    CEDULA               VARCHAR(10)          not null,
-   NRO_CUENTA           TEXT                 null,
    ID_TIPO              INT4                 null,
    NOMBRE               TEXT                 null,
    APELLIDO             TEXT                 null,
@@ -32,10 +32,21 @@ create table CLIENTE (
 );
 
 /*==============================================================*/
+/* Table: CONTADOR                                              */
+/*==============================================================*/
+create table CONTADOR (
+   ID_CONTADOR          INT4                 not null,
+   CONTADOR             TEXT                 null,
+   VALOR                NUMERIC              null,
+   constraint PK_CONTADOR primary key (ID_CONTADOR)
+);
+
+/*==============================================================*/
 /* Table: CUENTA                                                */
 /*==============================================================*/
 create table CUENTA (
    NRO_CUENTA           TEXT                 not null,
+   CEDULA               VARCHAR(10)          null,
    SALDO                NUMERIC(15,2)        null,
    TOKEN                TEXT                 null,
    constraint PK_CUENTA primary key (NRO_CUENTA)
@@ -88,13 +99,13 @@ create table USUARIO (
 );
 
 alter table CLIENTE
-   add constraint FK_CLIENTE_REFERENCE_CUENTA foreign key (NRO_CUENTA)
-      references CUENTA (NRO_CUENTA)
-      on delete restrict on update restrict;
-
-alter table CLIENTE
    add constraint FK_CLIENTE_REFERENCE_TIPOUSR foreign key (ID_TIPO)
       references TIPOUSR (ID_TIPO)
+      on delete restrict on update restrict;
+
+alter table CUENTA
+   add constraint FK_CUENTA_REFERENCE_CLIENTE foreign key (CEDULA)
+      references CLIENTE (CEDULA)
       on delete restrict on update restrict;
 
 alter table TRANSACCION
@@ -106,7 +117,6 @@ alter table USUARIO
    add constraint FK_USUARIO_REFERENCE_TIPOUSR foreign key (ID_TIPO)
       references TIPOUSR (ID_TIPO)
       on delete restrict on update restrict;
-
 
 /*==============================================================*/
 /* DATOS SQL		                                            */
@@ -120,3 +130,5 @@ insert into usuario values (default, 1, 'root', 'root', 'root', 'admin');
 
 insert into tipotrans values (1,'Recarga');
 insert into tipotrans values (2,'Transferencia');
+
+insert into contador values(1,'cuenta',1);

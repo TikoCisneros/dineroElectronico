@@ -2,6 +2,7 @@ package dinero.electronico.model.dao.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -30,15 +31,14 @@ public class Cliente implements Serializable {
 
 	private String telefono;
 
-	//bi-directional many-to-one association to Cuenta
-	@ManyToOne
-	@JoinColumn(name="nro_cuenta")
-	private Cuenta cuenta;
-
 	//bi-directional many-to-one association to Tipousr
 	@ManyToOne
 	@JoinColumn(name="id_tipo")
 	private Tipousr tipousr;
+
+	//bi-directional many-to-one association to Cuenta
+	@OneToMany(mappedBy="cliente")
+	private List<Cuenta> cuentas;
 
 	public Cliente() {
 	}
@@ -107,20 +107,34 @@ public class Cliente implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public Cuenta getCuenta() {
-		return this.cuenta;
-	}
-
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
-	}
-
 	public Tipousr getTipousr() {
 		return this.tipousr;
 	}
 
 	public void setTipousr(Tipousr tipousr) {
 		this.tipousr = tipousr;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return this.cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+	public Cuenta addCuenta(Cuenta cuenta) {
+		getCuentas().add(cuenta);
+		cuenta.setCliente(this);
+
+		return cuenta;
+	}
+
+	public Cuenta removeCuenta(Cuenta cuenta) {
+		getCuentas().remove(cuenta);
+		cuenta.setCliente(null);
+
+		return cuenta;
 	}
 
 }
