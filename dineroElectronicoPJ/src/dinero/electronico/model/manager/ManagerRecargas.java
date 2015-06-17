@@ -26,7 +26,7 @@ public class ManagerRecargas {
 	
 	/**
 	 * Valida el usuario a recargar dinero
-	 * @param alias
+	 * @param cedula
 	 * @param pass
 	 * @return Cliente existente
 	 * @throws Exception
