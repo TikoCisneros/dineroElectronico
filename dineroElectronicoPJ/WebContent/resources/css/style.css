@@ -14,6 +14,10 @@ padding: 50px;
 margin: 20px auto;
 width: 300px;
 }
+.recarga{
+margin: 10% auto;
+width: 580px;	
+}
 .login-screen {
 background-color: #FFF;
 padding: 20px;
@@ -90,4 +94,14 @@ box-shadow: none;
 
 .btnr:hover {
   background-color: #E74646;
+}
+
+.btns{
+	text-align: center;
+}
+
+.ui-widget-header{
+	background: #34AFD5;
+	color: #FFF;
+	text-align: center;
 }

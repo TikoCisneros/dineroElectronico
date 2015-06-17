@@ -32,9 +32,9 @@ public class ManagerRecargas {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public Cliente validarUsuario(String alias, String pass) throws Exception{
+	public Cliente validarUsuario(String cedula, String pass) throws Exception{
 		try {
-			List<Cliente> listado = (List<Cliente>) mngDAO.findByParam(Cliente.class, "o.alias", alias, null);
+			List<Cliente> listado = (List<Cliente>) mngDAO.findByParam(Cliente.class, "o.cedula", cedula, null);
 			if(listado == null || listado.isEmpty()){
 				throw new Exception("No se encuentra el usuario."); 
 			}

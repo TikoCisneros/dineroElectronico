@@ -7,9 +7,36 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Recargas</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head> 
-<body> 
-	<p:keyboard password="true" keypadOnly="true"  showMode="button" 
-	closeLabel="Cerrar" clearLabel="Borrar" backspaceLabel="Atr&aacute;s"/>
+<body>
+	<div class="recarga">
+		<div class="login-screen">
+			<h:form id="frm">
+			<p:growl showDetail="true"></p:growl>
+			<p:panel header="Recarga de Dinero Electr&oacute;nico">
+				<p:panelGrid columns="2" styleClass="ui-noborder">
+					<h:outputText value="C&eacute;dula*" />
+					<p:inputText value="#{recargaBean.ci}" required="true" id="cedula" maxlength="10" requiredMessage="Campo C&eacute;dula Requerido" validatorMessage="Solo ingrese numeros">
+						<f:validateRegex pattern="[0-9]+" /> 
+					</p:inputText>
+					<h:outputText value="Contrase&ntilde;a*" />
+					<p:keyboard value="#{recargaBean.pass}" password="true" keypadOnly="true"  showMode="button"
+						required="true" requiredMessage="Campo Contrase&ntilde;a Requerido"
+						closeLabel="Cerrar" clearLabel="Borrar" backspaceLabel="Atr&aacute;s"/>
+					<h:outputText value="Monto de Recarga*" />
+					<p:inputText value="#{recargaBean.monto}" required="true" requiredMessage="Campo Monto Requerido"/>
+				</p:panelGrid>
+			</p:panel>
+			<br/>
+			<div class="btns">
+				<p:commandButton icon="ui-icon-check" styleClass="btn-info" style="color:#fff;" 
+					value="Recargar" action="#{recargaBean.recargar()}" update="frm"></p:commandButton>
+				<p:commandButton  type="reset" styleClass="btn-danger" style="color:#fff;margin-left:80px;" 
+					value="Cancelar"></p:commandButton>
+			</div>
+			</h:form>
+		</div>
+	</div>
 </body> 
 </html>
