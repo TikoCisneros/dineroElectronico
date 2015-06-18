@@ -1,5 +1,6 @@
 package dinero.electronico.model.manager;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -92,4 +93,15 @@ public class ManagerCliente {
 	
 	/***********************************TRANSFERENCIA***********************************/
 	
+	public void generarTransferencia(String nroCuentaO, String nroCuentaD, String token, BigDecimal costo){
+		//Validar existencia cuenta origen
+		
+		//Validar token cuenta origen
+		
+		//Revisa valor cuenta origen
+		
+		//Realiza transferencia para cuenta Origen
+		
+		//Realiza transferencia para cuenta Destino
+	}
 }
