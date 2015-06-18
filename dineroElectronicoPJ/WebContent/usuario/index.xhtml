@@ -1,12 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<h:head>
-	</h:head>
-	<h:body>
-	Usuario
-	</h:body>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Inicio</title>
+	<h:outputStylesheet library="css" name="movil.css" />
+</h:head>
+<h:body>
+  <b:navBar inverse="true" brand="Money Way">
+  	<b:navbarLinks pull="right">
+	 	<h:form>
+	 		<b:commandButton value="SALIR" style="margin:10px;" iconAwesome="remove" iconAlign="right"></b:commandButton>
+	 	</h:form>
+  	</b:navbarLinks>
+  </b:navBar> 
+  <b:container>
+  	<b:panel title="Acciones" look="primary">
+		<b:row styleClass="show-grid">
+		    <b:column col-xs="6">
+		    	<b:thumbnail>
+		    		<h:outputText value="col-xs=6"/>
+		    	</b:thumbnail>
+		    </b:column>
+		    <b:column col-xs="6">
+		    	<b:thumbnail>
+		    		<h:outputText value="col-xs=6"/>
+		    	</b:thumbnail>
+		    </b:column>
+		</b:row>
+		<b:row styleClass="show-grid">
+		    <b:column col-xs="6">
+		    	<b:thumbnail>
+		    		<h:outputText value="col-xs=6"/>
+		    	</b:thumbnail>
+		    </b:column>
+		    <b:column col-xs="6">
+		    	<b:thumbnail>
+		    		<h:outputText value="col-xs=6"/>
+		    	</b:thumbnail>
+		    </b:column>
+		</b:row>
+	</b:panel>
+  </b:container>
+</h:body>
 </html>
