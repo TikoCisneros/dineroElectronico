@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>Registro</title>
+</h:head>
+<h:body>
+<b:container>
+	<br/>	
+	<h:form>
+		<b:commandButton value="Volver" action="#{registroBean.cancelar()}"></b:commandButton>
+	</h:form>
+	<hr/>				
+	<h:form id="frm">
+		<p:messages showDetail="true"></p:messages> 
+		<b:panel look="primary" title="Registro de Usuario">
+			<b:panelGrid colSpans="2,10">
+				<h:outputLabel value="C&eacute;dula*" />
+				<b:inputText value="#{registroBean.cedula}" maxlength="10" validatorMessage="C&eacute;dula debe contener solo numeros"
+					required="true" requiredMessage="Campo C&eacute;dula Requerido" >
+					<f:validateRegex pattern="[0-9]+" /> 
+				</b:inputText>
+				<h:outputLabel value="Apellidos*" />
+				<b:inputText value="#{registroBean.apellido}" validatorMessage="Apellidos debe contener solo letras"
+					required="true" requiredMessage="Campo Apellidos Requerido" >
+					<f:validateRegex pattern="[A-Za-z]+" />
+				</b:inputText>
+				<h:outputLabel value="Nombres*" />
+				<b:inputText value="#{registroBean.nombre}" validatorMessage="Nombres debe contener solo letras"
+					required="true" requiredMessage="Campo Nombres Requerido" >
+					<f:validateRegex pattern="[A-Za-z]+" />
+				</b:inputText>
+				<h:outputLabel value="Tel&eacute;fono*" />
+				<b:inputText value="#{registroBean.telefono}" validatorMessage="Tel&eacute;fono debe contener solo numeros"
+					required="true" requiredMessage="Campo Tel&eacute;fono Requerido" >
+					<f:validateRegex pattern="[0-9]+" />
+				</b:inputText>
+				<h:outputLabel value="Correo*" />
+				<b:inputText value="#{registroBean.correo}" validatorMessage="Correo no valido"
+					required="true" requiredMessage="Campo Correo Requerido" >
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</b:inputText>
+				<h:outputLabel value="Direcci&oacute;n*" />
+				<b:inputText value="#{registroBean.direccion}" validatorMessage="Direcci&oacute;n contiene caracteres no validos"
+					required="true" requiredMessage="Direcci&oacute;n Alias Requerido" >
+					<f:validateRegex pattern="[A-Za-z 0-9]+" />
+				</b:inputText>
+				<h:outputLabel value="Alias*" />
+				<b:inputText value="#{registroBean.alias}" validatorMessage="Alias debe contener solo letras"
+					required="true" requiredMessage="Campo Alias Requerido" >
+					<f:validateRegex pattern="[A-Za-z]+" />
+				</b:inputText>
+				<h:outputLabel value="Contrase&ntilde;a*" />
+				<b:inputSecret value="#{registroBean.pass}" validatorMessage="Contrase&ntilde;a debe contener solo numeros"
+					required="true" requiredMessage="Campo Contrase&ntilde;a Requerido" >
+					<f:validateRegex pattern="[0-9]+" />
+				</b:inputSecret>
+				<h:outputLabel value="Confirmaci&oacute;n*" />
+				<b:inputSecret value="#{registroBean.confpass}" validatorMessage="Confirmaci&oacute;n debe contener solo numeros"
+					required="true" requiredMessage="Campo Confirmaci&oacute;n Requerido" >
+					<f:validateRegex pattern="[0-9]+" />
+				</b:inputSecret>
+				<b:commandButton value="Registrarme" action="#{registroBean.registrarse()}" update="frm" look="primary"></b:commandButton>
+			</b:panelGrid>
+		</b:panel>
+	</h:form>
+</b:container>
+</h:body>
+</html>

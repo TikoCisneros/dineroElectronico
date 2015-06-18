@@ -110,8 +110,12 @@ public class SessionBean implements Serializable {
     	return "/index?faces-redirect=true";
     }
     
+    /**
+     * Registrarse
+     * @return
+     */
     public String registro(){
-    	return "/registro?faces-redirect=true";
+    	return "registro?faces-redirect=true";
     }
 
     /**
