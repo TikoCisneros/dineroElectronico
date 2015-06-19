@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -10,6 +11,57 @@
 	<h:outputStylesheet library="css" name="movil.css" />
 </h:head>
 <h:body> 
-
+	<b:navBar inverse="true" brand="Money Way">
+	  <b:navbarLinks>
+		 	<b:navLink value="Regresar" iconAwesome="chevron-left" href="index.xhtml"></b:navLink>
+	  </b:navbarLinks>
+	</b:navBar> 
+	<b:container>
+		<b:tabView>
+			<b:tab title="Mi cuenta">
+		        <b:panel title="Datos Personales" look="primary" styleClass="paneltop">	        	
+		        	<b:panelGrid colSpans="2,10">
+						<h:outputLabel value="C&eacute;dula:" />
+						<b:inputText value="" disabled="true"/>
+						<h:outputLabel value="Apellidos:" />
+						<b:inputText value="" disabled="true"/>
+						<h:outputLabel value="Nombres:" />
+						<b:inputText value="" disabled="true"/>
+						<h:outputLabel value="Tel&eacute;fono:" />
+						<b:inputText value="" disabled="true"/>
+						<h:outputLabel value="Correo:" />
+						<b:inputText value="" disabled="true"/>
+						<h:outputLabel value="Direcci&oacute;n:" />
+						<b:inputText value="" disabled="true"/>
+					</b:panelGrid>
+		        </b:panel>
+		    </b:tab>
+		    <b:tab title="Cambiar Pass">
+		        <h:form id="frm">
+		        	<p:messages showDetail="true"></p:messages>
+			        <b:panel title="Nueva Contrase&ntilde;a" look="primary" styleClass="paneltop">
+			        	<b:panelGrid colSpans="2,10">
+			        		<h:outputLabel value="Contrase&ntilde;a Actual*" />
+			        		<b:inputText value="" validatorMessage="Contrase&ntilde;a Actual debe contener solo numeros"
+								required="true" requiredMessage="Campo Contrase&ntilde;a Actual Requerido" >
+								<f:validateRegex pattern="[0-9]+" />
+							</b:inputText>
+							<h:outputLabel value="Contrase&ntilde;a*" />
+							<b:inputSecret value="" validatorMessage="Contrase&ntilde;a debe contener solo numeros"
+								required="true" requiredMessage="Campo Contrase&ntilde;a Requerido" >
+								<f:validateRegex pattern="[0-9]+" />
+							</b:inputSecret>
+							<h:outputLabel value="Confirmaci&oacute;n*" />
+							<b:inputSecret value="" validatorMessage="Confirmaci&oacute;n debe contener solo numeros"
+								required="true" requiredMessage="Campo Confirmaci&oacute;n Requerido" >
+								<f:validateRegex pattern="[0-9]+" />
+							</b:inputSecret>
+							<b:commandButton value="Cambiar" update="frm" look="primary"></b:commandButton>
+			        	</b:panelGrid>
+			        </b:panel>
+		        </h:form>
+		    </b:tab>
+		</b:tabView>
+	</b:container>
 </h:body> 
 </html>

@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -12,16 +13,17 @@
 <h:body> 
 	<b:navBar inverse="true" brand="Money Way">
 	  <b:navbarLinks>
-		 	<b:navLink value="Regresar" href="index.xhtml"></b:navLink>
+		 	<b:navLink value="Regresar" iconAwesome="chevron-left" href="index.xhtml"></b:navLink>
 	  </b:navbarLinks>
 	</b:navBar>
 	<b:container>
 		<h:form id="frmtoken" style="text-align:center;">
+			<p:messages showDetail="true"></p:messages>
 			<b:panel look="primary" title="Token Generado">
 				<h:outputText value="1234" styleClass="token"/>
 			</b:panel>
 			<b:commandButton value="Generar Token" look="primary" size="lg" styleClass="gen"
-				iconAwesome="random" iconAlign="right"/>
+				iconAwesome="random" iconAlign="right" update="frmtoken"/>
 		</h:form>
 	</b:container>
 </h:body> 
