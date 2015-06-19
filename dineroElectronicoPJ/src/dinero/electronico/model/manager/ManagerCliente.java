@@ -1,12 +1,15 @@
 package dinero.electronico.model.manager;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Cuenta;
+import dinero.electronico.model.dao.entities.Tipotran;
 import dinero.electronico.model.dao.entities.Transaccion;
 
 public class ManagerCliente {
@@ -87,21 +90,62 @@ public class ManagerCliente {
 			cta.setToken(this.tokenAleatorio());
 			mngDAO.actualizar(cta);
 		} catch (Exception e) {
-			throw new Exception("No se pudo generar token"); 
+			throw new Exception("Error: "+e.getMessage()); 
 		}
 	}
 	
 	/***********************************TRANSFERENCIA***********************************/
 	
-	public void generarTransferencia(String nroCuentaO, String nroCuentaD, String token, BigDecimal costo){
-		//Validar existencia cuenta origen
-		
-		//Validar token cuenta origen
-		
-		//Revisa valor cuenta origen
-		
-		//Realiza transferencia para cuenta Origen
-		
-		//Realiza transferencia para cuenta Destino
+	/**
+	 * Realiza una transferencia de dinero
+	 * @param nroCuentaO cuenta del Cliente quien reduce su monto
+	 * @param nroCuentaD cuenta del Cliente quien aumenta su monto
+	 * @param token validacion de seguridad de cuenta Origen
+	 * @param costo dinero a transferir
+	 * @throws Exception
+	 */
+	public void generarTransferencia(String nroCuentaO, String nroCuentaD, String token, BigDecimal costo) throws Exception{
+		try {
+			Cuenta cta = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaO);
+			Cuenta ctaf = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaD);
+			//Validar existencia cuenta origen
+			if(cta == null || ctaf == null){
+				throw new Exception("No existe la cuenta"); 
+			}
+			//Validar token cuenta origen
+			if(!cta.getToken().equals(token)){
+				throw new Exception("Token incorrecto"); 
+			}
+			//Revisa valor cuenta origen
+			if(cta.getSaldo().compareTo(costo) == -1){
+				throw new Exception("El valor supera el saldo de la cuenta");
+			}
+			//Tipo de transaccion
+			Tipotran tp = (Tipotran) mngDAO.findById(Tipotran.class, 2);
+			Date fa = new Date();
+			/**Realiza transferencia para cuenta Origen, reduce valor**/
+			//Reducir saldo
+			BigDecimal oSaldo = cta.getSaldo().subtract(costo);
+			cta.setSaldo(oSaldo);
+			mngDAO.actualizar(cta);
+			//Guardar transaccion
+			Transaccion trans  = new Transaccion();
+			trans.setTipotran(tp);trans.setMonto(costo);
+			trans.setFecha(new Timestamp(fa.getTime()));
+			trans.setNroCuenta(nroCuentaO);trans.setNrocDestino(nroCuentaD);
+			trans.setSaldoActual(cta.getSaldo());trans.setSaldoFinal(oSaldo);
+			mngDAO.insertar(trans);
+			/**Realiza transferencia para cuenta Destino, aumenta valor**/
+			//Aumentar saldo
+			BigDecimal fSaldo = ctaf.getSaldo().add(costo);
+			ctaf.setSaldo(fSaldo);
+			mngDAO.actualizar(ctaf);
+			//Guardar transaccion
+			trans.setNroCuenta(nroCuentaD);trans.setNrocDestino(nroCuentaO);
+			trans.setSaldoActual(ctaf.getSaldo());trans.setSaldoFinal(fSaldo);
+			mngDAO.insertar(trans);
+		} catch (Exception e) {
+			throw new Exception("Error: "+e.getMessage()); 
+		}
 	}
 }
