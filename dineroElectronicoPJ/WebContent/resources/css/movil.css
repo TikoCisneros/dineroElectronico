@@ -8,3 +8,10 @@
 .token{
 	font-size: 200px;
 }
+/***Theme***/
+.panel-primary{border-color:#2fa4e7}
+.panel-primary>.panel-heading {
+	background-color: #2fa4e7;
+	border-color: #2fa4e7;
+	background-image: linear-gradient(to bottom,#54b4eb 0,#2fa4e7 100%);
+}
