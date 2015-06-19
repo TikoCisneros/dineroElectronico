@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -16,6 +17,26 @@
 	  </b:navbarLinks>
 	</b:navBar> 
 	<b:container>
+		<h:form id="frmt">
+			<p:messages showDetail="true"></p:messages>
+			<b:panel title="Datos de transferencia" look="primary">
+				<b:panelGrid colSpans="2,10">
+					<h:outputText value="Nro. de Cuenta*" />
+					<b:inputText value="" maxlength="10" validatorMessage="Nro. de Cuenta debe contener solo numeros"
+						required="true" requiredMessage="Campo Nro. de Cuenta Requerido" >
+						<f:validateRegex pattern="[0-9]+" /> 
+					</b:inputText>
+					<h:outputText value="Token de Validaci&oacute;n*" />
+					<b:inputText value="" maxlength="4" validatorMessage="Token debe contener solo numeros"
+						required="true" requiredMessage="Campo Token Requerido" >
+						<f:validateRegex pattern="[0-9]+" /> 
+					</b:inputText>
+					<h:outputText value="Monto*" />
+					<b:inputText value="" required="true" requiredMessage="Campo Monto Requerido" />
+					<b:commandButton value="Transferir" update="frmt" look="primary" size="lg"/>
+				</b:panelGrid>
+			</b:panel>
+		</h:form>
 	</b:container>
 </h:body> 
 </html>
