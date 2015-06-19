@@ -84,11 +84,13 @@ public class ManagerCliente {
 	 * @param nrocuenta
 	 * @throws Exception
 	 */
-	public void ingresarTokenCuenta(String nrocuenta) throws Exception{
+	public String ingresarTokenCuenta(String nrocuenta) throws Exception{
 		try {
 			Cuenta cta = (Cuenta) mngDAO.findById(Cuenta.class, nrocuenta);
-			cta.setToken(this.tokenAleatorio());
+			String token = this.tokenAleatorio();
+			cta.setToken(token);
 			mngDAO.actualizar(cta);
+			return token;
 		} catch (Exception e) {
 			throw new Exception("Error: "+e.getMessage()); 
 		}

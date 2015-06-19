@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import dinero.electronico.model.manager.ManagerAdmin;
 import dinero.electronico.model.dao.entities.Cliente;
-import dinero.electronico.model.dao.entities.Usuario;
 
 
 @SessionScoped
@@ -23,7 +22,7 @@ public class SessionBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Usuario session;
+	private Cliente session;
 	private ManagerAdmin mngAdmin;
 	
 	private String alias;
@@ -64,7 +63,7 @@ public class SessionBean implements Serializable {
 	/**
 	 * @return the session
 	 */
-	public Usuario getSession() {
+	public Cliente getSession() {
 		return session;
 	}
 	
@@ -75,23 +74,10 @@ public class SessionBean implements Serializable {
 	public String login(){
 		String rsp = "";
 		try {
-			if(getAlias().equals("root") && getPass().equals("root")){
-				rsp="/admin/index?faces-redirect=true";
-				session = new Usuario();
-				session.setNombre("Administrador Aplicacion");session.setApellido("Administrador Aplicacion");
-				session.setAlias("root");session.setPass("root");session.setTipousr(mngAdmin.findTipoUSRByID(1));//Administrador
-				System.out.println("Usuario ROOT conectado.");
-			}else{
-				Cliente cli = mngAdmin.findClienteByAliasAndPass(getAlias(), getPass());
-				session.setNombre(cli.getNombre());session.setApellido(cli.getApellido());
-				session.setAlias(cli.getAlias());session.setPass(cli.getPass());
-				session.setTipousr(cli.getTipousr());
-				String rol = cli.getTipousr().getTipo().toLowerCase();
-				if(rol.equals("administrador")){
-					rsp="/admin/index?faces-redirect=true";
-				}else if(rol.equals("operador")){
-					rsp="/usuario/index?faces-redirect=true";
-				}
+			session = mngAdmin.findClienteByAliasAndPass(getAlias(), getPass());
+			String rol = session.getTipousr().getTipo().toLowerCase();
+			if(rol.equals("usuario")){
+				rsp="/usuario/index?faces-redirect=true";
 			}	
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al intentar ingresar al sistema",null));
@@ -123,7 +109,7 @@ public class SessionBean implements Serializable {
      * @param rol de usuario
      * @return Clase Usuario
      */
-    public static Usuario verificarSession(String rol){
+    public static Cliente verificarSession(String rol){
     	HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         SessionBean user = (SessionBean) session.getAttribute("sessionBean");
@@ -140,9 +126,7 @@ public class SessionBean implements Serializable {
             } else {
             	
             	String rsp = "";
-            	if(rol.equals("administrador")){
-    				rsp="/admin/index?faces-redirect=true";
-    			}else if(rol.equals("operador")){
+            	if(rol.equals("usuario")){
     				rsp="/usuario/index?faces-redirect=true";
     			}
             	
