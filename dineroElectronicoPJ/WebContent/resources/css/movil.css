@@ -1,4 +1,7 @@
 @CHARSET "ISO-8859-1";
-.help{
-	margin: 100px auto;
+.gen{
+	margin-top: 50px;
+}
+.token{
+	font-size: 200px;
 }

@@ -2,10 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
-
-<h:head></h:head> 
-<body> 
-
-</body> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Token</title>
+	<h:outputStylesheet library="css" name="movil.css" />
+</h:head>
+<h:body> 
+	<b:navBar inverse="true" brand="Money Way">
+	  <b:navbarLinks>
+		 	<b:navLink value="Regresar" href="index.xhtml"></b:navLink>
+	  </b:navbarLinks>
+	</b:navBar>
+	<b:container>
+		<h:form id="frmtoken" style="text-align:center;">
+			<b:panel look="primary" title="Token Generado">
+				<h:outputText value="1234" styleClass="token"/>
+			</b:panel>
+			<b:commandButton value="Generar Token" look="primary" size="lg" styleClass="gen"
+				iconAwesome="random" iconAlign="right"/>
+		</h:form>
+	</b:container>
+</h:body> 
 </html>
