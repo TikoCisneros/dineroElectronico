@@ -9,7 +9,41 @@
 	<title>Historial</title>
 	<h:outputStylesheet library="css" name="movil.css" />
 </h:head>
-<h:body> 
-
+<h:body>
+	<b:navBar inverse="true" brand="Money Way">
+	  <b:navbarLinks>
+		 	<b:navLink value="Regresar" href="index.xhtml"></b:navLink>
+	  </b:navbarLinks>
+	</b:navBar> 
+	<b:container>
+		<b:panel title="Transacciones Realizadas" look="primary">
+			<div class="table-responsive">
+			<h:form>
+			<h:dataTable styleClass="table table-striped" >
+				<h:column>
+				    <f:facet name="header">Fecha</f:facet>
+				    <h:outputText value="dd/MM/AAAA" />
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Tipo</f:facet>
+				    <h:outputText value="Transferencia" />
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Saldo Anterior</f:facet>
+				    <h:outputText value="100" />
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Monto</f:facet>
+				    <h:outputText value="10" />
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Saldo Actual</f:facet>
+				    <h:outputText value="110" />
+				</h:column>
+			</h:dataTable>
+			</h:form>
+			</div>
+		</b:panel>
+	</b:container>
 </h:body> 
 </html>
