@@ -23,6 +23,7 @@ public class HistorialBean implements Serializable{
 	}
 
 	/**
+	 * https://github.com/TheCoder4eu/BootsFaces/issues/22
 	 * @return the listado
 	 */
 	public List<Transaccion> getListado() {
