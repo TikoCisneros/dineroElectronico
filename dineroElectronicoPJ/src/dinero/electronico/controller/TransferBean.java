@@ -18,7 +18,7 @@ public class TransferBean implements Serializable{
 	private static final long serialVersionUID = -5489595825791589803L;
 	
 	private ManagerCliente mngCli;
-	private String nroCuentaO; 
+	private String nroCuentaD; 
 	private String token; 
 	private BigDecimal costo;
 	
@@ -30,17 +30,17 @@ public class TransferBean implements Serializable{
 	}
 
 	/**
-	 * @return the nroCuentaO
+	 * @return the nroCuentaD
 	 */
-	public String getNroCuentaO() {
-		return nroCuentaO;
+	public String getNroCuentaD() {
+		return nroCuentaD;
 	}
 
 	/**
-	 * @param nroCuentaO the nroCuentaO to set
+	 * @param nroCuentaD the nroCuentaD to set
 	 */
-	public void setNroCuentaO(String nroCuentaO) {
-		this.nroCuentaO = nroCuentaO;
+	public void setNroCuentaD(String nroCuentaD) {
+		this.nroCuentaD = nroCuentaD;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class TransferBean implements Serializable{
 	 */
 	public String transferir(){
 		try {
-			mngCli.generarTransferencia(getNroCuentaO(), sesion.getCedula(), getToken(), getCosto());
+			mngCli.generarTransferencia(sesion.getCedula(),getNroCuentaD(), getToken(), getCosto());
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta" ,e.getMessage()));
 		}
