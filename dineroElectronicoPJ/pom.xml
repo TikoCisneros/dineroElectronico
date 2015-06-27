@@ -99,5 +99,15 @@
 	    <version>0.6.6</version>
 	    <scope>compile</scope>
 	</dependency>
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.4.7</version>
+	</dependency>
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.5.4</version>
+	</dependency>
   </dependencies>
 </project>
