@@ -24,17 +24,17 @@
 		        <b:panel title="Datos Personales" look="primary" styleClass="paneltop">	        	
 		        	<b:panelGrid colSpans="2,10">
 						<h:outputLabel value="C&eacute;dula:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.cedula}" disabled="true"/>
 						<h:outputLabel value="Apellidos:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.apellido}" disabled="true"/>
 						<h:outputLabel value="Nombres:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.nombre}" disabled="true"/>
 						<h:outputLabel value="Tel&eacute;fono:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.telefono}" disabled="true"/>
 						<h:outputLabel value="Correo:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.correo}" disabled="true"/>
 						<h:outputLabel value="Direcci&oacute;n:" />
-						<b:inputText value="" disabled="true"/>
+						<b:inputText value="#{cuentaBean.direccion}" disabled="true"/>
 					</b:panelGrid>
 		        </b:panel>
 		    </b:tab>
@@ -44,21 +44,21 @@
 			        <b:panel title="Nueva Contrase&ntilde;a" look="primary" styleClass="paneltop">
 			        	<b:panelGrid colSpans="2,10">
 			        		<h:outputLabel value="Contrase&ntilde;a Actual*" />
-			        		<b:inputText value="" validatorMessage="Contrase&ntilde;a Actual debe contener solo numeros"
+			        		<b:inputText value="#{cuentaBean.pass}" validatorMessage="Contrase&ntilde;a Actual debe contener solo numeros"
 								required="true" requiredMessage="Campo Contrase&ntilde;a Actual Requerido" >
 								<f:validateRegex pattern="[0-9]+" />
 							</b:inputText>
 							<h:outputLabel value="Contrase&ntilde;a*" />
-							<b:inputSecret value="" validatorMessage="Contrase&ntilde;a debe contener solo numeros"
+							<b:inputSecret value="#{cuentaBean.npass}" validatorMessage="Contrase&ntilde;a debe contener solo numeros"
 								required="true" requiredMessage="Campo Contrase&ntilde;a Requerido" >
 								<f:validateRegex pattern="[0-9]+" />
 							</b:inputSecret>
 							<h:outputLabel value="Confirmaci&oacute;n*" />
-							<b:inputSecret value="" validatorMessage="Confirmaci&oacute;n debe contener solo numeros"
+							<b:inputSecret value="#{cuentaBean.nconfpass}" validatorMessage="Confirmaci&oacute;n debe contener solo numeros"
 								required="true" requiredMessage="Campo Confirmaci&oacute;n Requerido" >
 								<f:validateRegex pattern="[0-9]+" />
 							</b:inputSecret>
-							<b:commandButton value="Cambiar" update="frm" look="primary"></b:commandButton>
+							<b:commandButton value="Cambiar" action="#{cuentaBean.cambiarPass()}" update="frm" look="primary"></b:commandButton>
 			        	</b:panelGrid>
 			        </b:panel>
 		        </h:form>

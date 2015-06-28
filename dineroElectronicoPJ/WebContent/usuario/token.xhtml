@@ -21,11 +21,14 @@
 	<b:container>
 		<h:form id="frmtoken" style="text-align:center;">
 			<p:messages showDetail="true"></p:messages>
-			<b:panel look="primary" title="Token Generado">
-				<h:outputText value="1234" styleClass="token"/>
+			<b:panel look="primary" title="Token de Transferencia">
+				<h:outputText value="#{tokenBean.token}" styleClass="token"/>
 			</b:panel>
+			<b:commandButton value="Ver Token" look="warning"  size="lg" styleClass="gen"
+				iconAwesome="search" iconAlign="right" action="#{tokenBean.verToken()}" update="frmtoken"/>
+				&nbsp;&nbsp;
 			<b:commandButton value="Generar Token" look="primary" size="lg" styleClass="gen"
-				iconAwesome="random" iconAlign="right" update="frmtoken"/>
+				iconAwesome="random" iconAlign="right" action="#{tokenBean.genToken()}" update="frmtoken"/>
 		</h:form>
 	</b:container>
 </h:body> 

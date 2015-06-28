@@ -80,7 +80,7 @@ public class SessionBean implements Serializable {
 				rsp="/usuario/index?faces-redirect=true";
 			}	
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al intentar ingresar al sistema",null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingresar al sistema?",e.getMessage()));
 		}
 		return rsp;
 	}
@@ -122,7 +122,7 @@ public class SessionBean implements Serializable {
             return null;
         } else {
             if (user.getSession().getTipousr().getTipo().toLowerCase().equals(rol)) {
-                return user.getSession();
+            	return user.getSession();
             } else {
             	
             	String rsp = "";

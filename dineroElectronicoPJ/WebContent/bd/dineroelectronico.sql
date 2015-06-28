@@ -123,7 +123,7 @@ alter table USUARIO
 /*==============================================================*/
 
 insert into tipousr values (1,'Administrador');
-insert into tipousr values (2,'Usuario');
+insert into tipousr values (3,'Usuario');
 
 insert into usuario values (default, 1, 'root', 'root', 'root', 'admin');
 

@@ -1,10 +1,14 @@
 package dinero.electronico.model.manager;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Cuenta;
+import dinero.electronico.model.dao.entities.Tipotran;
+import dinero.electronico.model.dao.entities.Transaccion;
 
 public class ManagerRecargas {
 	
@@ -60,5 +64,14 @@ public class ManagerRecargas {
 		BigDecimal saldo = cta.getSaldo();
 		cta.setSaldo(saldo.add(recarga));
 		mngDAO.actualizar(cta);
+		//Tipo de transaccion
+		Tipotran tp = (Tipotran) mngDAO.findById(Tipotran.class, 2);
+		Date fa = new Date();
+		Transaccion trans  = new Transaccion();
+		trans.setTipotran(tp);trans.setMonto(recarga);
+		trans.setFecha(new Timestamp(fa.getTime()));
+		trans.setNroCuenta(cta.getNroCuenta());trans.setNrocDestino(cta.getNroCuenta());
+		trans.setSaldoActual(saldo);trans.setSaldoFinal(saldo.add(recarga));
+		mngDAO.insertar(trans);
 	}
 }

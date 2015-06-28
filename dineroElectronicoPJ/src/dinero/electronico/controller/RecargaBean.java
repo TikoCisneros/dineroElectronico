@@ -79,6 +79,7 @@ public class RecargaBean implements Serializable{
 			}else{
 				Cliente usr = mngRec.validarUsuario(getCi(), getPass());
 				mngRec.recargarDinero(usr.getCedula(), getMonto());
+				setCi("");setPass("");setMonto(new BigDecimal(0));
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proceso Correcto","Recarga realizada"));
 			}
 		} catch (Exception e) {

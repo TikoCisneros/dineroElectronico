@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dinero.electronico.model.manager.ManagerRegistro;
+import dinero.electronico.services.Validator;
 
 @ViewScoped
 @ManagedBean
@@ -175,13 +176,15 @@ public class RegistroBean implements Serializable{
 		try {
 			if(mngReg.aliasExiste(alias)){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alias existente" ,"Use otro alias alternativo"));
-			}else if(getPass().equals(getConfpass())){
+			}else if(!getPass().equals(getConfpass())){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Password" ,"Tanto la contrasenia como su confirmacion deben ser iguales"));
+			/*}else if(!Validator.validarCI(cedula)){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Cedula" ,"Ingrese un numero de cedula valido"));*/
+			}else{
 				mngReg.registrarClienteCuenta(cedula, nombre, apellido, telefono, correo, direccion, alias, confpass);
 				setCedula("");setNombre("");setApellido("");setCedula("");setTelefono("");
 				setCorreo("");setDireccion("");setPass("");setConfpass("");
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro correcto" ,"Ya puede usar el servicio, realice una recarga"));
-			}else{
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Password" ,"Tanto la contrasenia como su confirmacion deben ser iguales"));
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al intentar registrarse" ,e.getMessage()));

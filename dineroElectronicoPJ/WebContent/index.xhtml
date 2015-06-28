@@ -20,7 +20,8 @@
 			</div>
 
 			<div class="login-form">
-				<h:form>
+				<h:form id="flg">
+					<p:messages showDetail="true"></p:messages>
 					<div class="control-group">
 					<h:inputText value="#{sessionBean.alias}"  pl:placeholder="alias" id="login-name" styleClass="login-field"/>
 					<label class="login-field-icon fui-user" for="login-name"></label>
@@ -30,7 +31,7 @@
 					<h:inputSecret value="#{sessionBean.pass}"  pl:placeholder="password" id="login-pass" styleClass="login-field"/>
 					<label class="login-field-icon fui-lock" for="login-pass"></label>
 					</div>
-					<h:commandButton action="#{sessionBean.login()}" value="Iniciar sesi&oacute;n" styleClass="btn"/>
+					<p:commandButton action="#{sessionBean.login()}" value="Iniciar sesi&oacute;n" styleClass="btn" update="flg"/>
 					<h:commandButton action="#{sessionBean.registro()}" value="Registrarse" styleClass="btnr"/>
 				</h:form>
 			</div>

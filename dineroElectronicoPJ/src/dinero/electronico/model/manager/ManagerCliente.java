@@ -96,6 +96,22 @@ public class ManagerCliente {
 		}
 	}
 	
+	/**
+	 * Devuelve token actual
+	 * @param nrocuenta
+	 * @return
+	 * @throws Exception
+	 */
+	public String cargarTokenCuenta(String nrocuenta) throws Exception{
+		try {
+			Cuenta cta = (Cuenta) mngDAO.findById(Cuenta.class, nrocuenta);
+			String token = cta.getToken();
+			return token;
+		} catch (Exception e) {
+			throw new Exception("Error: "+e.getMessage()); 
+		}
+	}
+	
 	/***********************************TRANSFERENCIA***********************************/
 	
 	/**

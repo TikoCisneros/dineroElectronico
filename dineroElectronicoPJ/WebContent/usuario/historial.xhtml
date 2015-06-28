@@ -21,26 +21,30 @@
 		<b:panel title="Transacciones Realizadas" look="primary">
 			<div class="table-responsive">
 			<h:form>
-			<h:dataTable styleClass="table table-striped" >
+			<h:dataTable styleClass="table table-striped" value="#{historialBean.listado}" var="dt">
 				<h:column>
 				    <f:facet name="header">Fecha</f:facet>
-				    <h:outputText value="dd/MM/AAAA" />
+				    <h:outputText value="#{dt.fecha}" />
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Tipo</f:facet>
-				    <h:outputText value="Transferencia" />
+				    <h:outputText value="#{dt.tipotran.tipotrans}" />
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Cuenta</f:facet>
+				    <h:outputText value="#{dt.nrocDestino}" />
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Saldo Anterior</f:facet>
-				    <h:outputText value="100" />
+				    <h:outputText value="#{dt.saldoActual}" />
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Monto</f:facet>
-				    <h:outputText value="10" />
+				    <h:outputText value="#{dt.monto}" />
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Saldo Actual</f:facet>
-				    <h:outputText value="110" />
+				    <h:outputText value="#{dt.saldoFinal}" />
 				</h:column>
 			</h:dataTable>
 			</h:form>

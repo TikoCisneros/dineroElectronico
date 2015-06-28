@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.manager.ManagerCliente;
 
 @ViewScoped
@@ -17,9 +18,11 @@ public class TokenBean implements Serializable{
 	
 	private ManagerCliente mngCli;
 	private String token;
+	private Cliente session;
 	
 	public TokenBean() {
 		mngCli = new ManagerCliente();
+		session = SessionBean.verificarSession("usuario");
 	}
 
 	/**
@@ -36,13 +39,31 @@ public class TokenBean implements Serializable{
 		this.token = token;
 	}
 	
+	
+	public Cliente getSession() {
+		return session;
+	}
+	
 	/**
 	 * Genera un token para realizar una transaccion
 	 * @return ""
 	 */
 	public String genToken(){
 		try {
-			setToken(mngCli.ingresarTokenCuenta("1003443296")); //Cambiar por la sesion de usuario
+			setToken(mngCli.ingresarTokenCuenta(getSession().getCedula()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta" ,e.getMessage()));
+		}
+		return "";
+	}
+	
+	/**
+	 * Muestra el token actual
+	 * @return
+	 */
+	public String verToken(){
+		try {
+			setToken(mngCli.cargarTokenCuenta(getSession().getCedula()));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta" ,e.getMessage()));
 		}

@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import dinero.electronico.model.dao.entities.Transaccion;
+import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.manager.ManagerCliente;
 
 @ViewScoped
@@ -17,9 +18,15 @@ public class HistorialBean implements Serializable{
 	
 	private ManagerCliente mngCli;
 	private List<Transaccion> listado;
+	private Cliente session;
 	
 	public HistorialBean() {
 		mngCli = new ManagerCliente();
+		session = SessionBean.verificarSession("usuario");
+	}
+	
+	public Cliente getSession() {
+		return session;
 	}
 
 	/**
@@ -27,7 +34,7 @@ public class HistorialBean implements Serializable{
 	 * @return the listado
 	 */
 	public List<Transaccion> getListado() {
-		listado = mngCli.findTransaccionXCuenta("1003443296");//nro de sesion
+		listado = mngCli.findTransaccionXCuenta(getSession().getCedula());//nro de sesion
 		return listado;
 	}
 	
