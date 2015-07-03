@@ -24,15 +24,13 @@
 			<h:dataTable styleClass="table table-striped" value="#{historialBean.listado}" var="dt">
 				<h:column>
 				    <f:facet name="header">Fecha</f:facet>
-				    <h:outputText value="#{dt.fecha}" />
+				    <h:outputText value="#{dt.fecha}">
+				    	<f:convertDateTime pattern="dd/MM/yyyy" />
+				    </h:outputText>
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Tipo</f:facet>
 				    <h:outputText value="#{dt.tipotran.tipotrans}" />
-				</h:column>
-				<h:column>
-				    <f:facet name="header">Cuenta</f:facet>
-				    <h:outputText value="#{dt.nrocDestino}" />
 				</h:column>
 				<h:column>
 				    <f:facet name="header">Saldo Anterior</f:facet>
