@@ -9,6 +9,7 @@ import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Cuenta;
 import dinero.electronico.model.dao.entities.Tipotran;
 import dinero.electronico.model.dao.entities.Transaccion;
+import dinero.electronico.services.Mailer;
 
 public class ManagerRecargas {
 	
@@ -61,6 +62,7 @@ public class ManagerRecargas {
 	 */
 	public void recargarDinero(String ci, BigDecimal recarga) throws Exception{
 		Cuenta cta = this.findClienteByCI(ci);
+		String correo = cta.getCliente().getCorreo();
 		BigDecimal saldo = cta.getSaldo();
 		cta.setSaldo(saldo.add(recarga));
 		mngDAO.actualizar(cta);
@@ -73,5 +75,7 @@ public class ManagerRecargas {
 		trans.setNroCuenta(cta.getNroCuenta());trans.setNrocDestino(cta.getNroCuenta());
 		trans.setSaldoActual(saldo);trans.setSaldoFinal(saldo.add(recarga));
 		mngDAO.insertar(trans);
+		//Correo de aviso
+		Mailer.generateAndSendEmail(correo, "Recarga Exitosa", "Se han acreditado $"+recarga.toString()+" a su cuenta.");
 	}
 }

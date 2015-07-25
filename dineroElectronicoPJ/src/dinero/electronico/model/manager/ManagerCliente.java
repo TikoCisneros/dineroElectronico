@@ -11,6 +11,7 @@ import dinero.electronico.model.dao.entities.Cliente;
 import dinero.electronico.model.dao.entities.Cuenta;
 import dinero.electronico.model.dao.entities.Tipotran;
 import dinero.electronico.model.dao.entities.Transaccion;
+import dinero.electronico.services.Mailer;
 
 public class ManagerCliente {
 	private ManagerDAO mngDAO;
@@ -126,6 +127,8 @@ public class ManagerCliente {
 		try {
 			Cuenta cta = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaO);
 			Cuenta ctaf = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaD);
+			String mailo = cta.getCliente().getCorreo();
+			String maild = cta.getCliente().getCorreo();
 			//Validar existencia cuenta origen
 			if(cta == null || ctaf == null){
 				throw new Exception("No existe la cuenta"); 
@@ -162,6 +165,9 @@ public class ManagerCliente {
 			trans.setNroCuenta(nroCuentaD);trans.setNrocDestino(nroCuentaO);
 			trans.setSaldoActual(ctaf.getSaldo());trans.setSaldoFinal(fSaldo);
 			mngDAO.insertar(trans);
+			//MENSAJES
+			Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
+			Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
 		} catch (Exception e) {
 			throw new Exception("Error: "+e.getMessage()); 
 		}

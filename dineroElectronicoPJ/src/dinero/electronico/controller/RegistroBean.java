@@ -8,7 +8,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dinero.electronico.model.manager.ManagerRegistro;
-import dinero.electronico.services.Validator;
 
 @ViewScoped
 @ManagedBean
