@@ -21,7 +21,7 @@
 	</h:form>
 	<hr/>				
 	<h:form id="frm">
-		<p:messages showDetail="true"></p:messages> 
+		<p:messages showDetail="true" closable="true"></p:messages> 
 		<b:panel look="primary" title="Registro de Usuario">
 			<b:panelGrid colSpans="2,10">
 				<h:outputLabel value="C&eacute;dula*" />
@@ -32,12 +32,12 @@
 				<h:outputLabel value="Apellidos*" />
 				<b:inputText value="#{registroBean.apellido}" validatorMessage="Apellidos debe contener solo letras"
 					required="true" requiredMessage="Campo Apellidos Requerido" >
-					<f:validateRegex pattern="[A-Za-z]+" />
+					<f:validateRegex pattern="[A-Za-z/\s/]+" />
 				</b:inputText>
 				<h:outputLabel value="Nombres*" />
 				<b:inputText value="#{registroBean.nombre}" validatorMessage="Nombres debe contener solo letras"
 					required="true" requiredMessage="Campo Nombres Requerido" >
-					<f:validateRegex pattern="[A-Za-z]+" />
+					<f:validateRegex pattern="[A-Za-z/\s/]+" />
 				</b:inputText>
 				<h:outputLabel value="Tel&eacute;fono*" />
 				<b:inputText value="#{registroBean.telefono}" validatorMessage="Tel&eacute;fono debe contener solo numeros"

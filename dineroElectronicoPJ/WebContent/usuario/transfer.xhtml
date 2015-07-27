@@ -24,18 +24,18 @@
 			<b:panel title="Datos de transferencia" look="primary">
 				<b:panelGrid colSpans="2,10">
 					<h:outputText value="Nro. de Cuenta*" />
-					<b:inputText value="" maxlength="10" validatorMessage="Nro. de Cuenta debe contener solo numeros"
+					<b:inputText value="#{transferBean.nroCuentaD}" maxlength="10" validatorMessage="Nro. de Cuenta debe contener solo numeros"
 						required="true" requiredMessage="Campo Nro. de Cuenta Requerido" >
 						<f:validateRegex pattern="[0-9]+" /> 
 					</b:inputText>
 					<h:outputText value="Token de Validaci&oacute;n*" />
-					<b:inputText value="" maxlength="4" validatorMessage="Token debe contener solo numeros"
+					<b:inputText value="#{transferBean.token}" maxlength="4" validatorMessage="Token debe contener solo numeros"
 						required="true" requiredMessage="Campo Token Requerido" >
 						<f:validateRegex pattern="[0-9]+" /> 
 					</b:inputText>
 					<h:outputText value="Monto*" />
-					<b:inputText value="" required="true" requiredMessage="Campo Monto Requerido" />
-					<b:commandButton value="Transferir" update="frmt" look="primary" size="lg"/>
+					<b:inputText value="#{transferBean.costo}" required="true" requiredMessage="Campo Monto Requerido" />
+					<b:commandButton value="Transferir" action="#{transferBean.transferir()}" update="frmt" look="primary" size="lg"/>
 				</b:panelGrid>
 			</b:panel>
 		</h:form>

@@ -146,6 +146,7 @@ public class ManagerCliente {
 			Date fa = new Date();
 			/**Realiza transferencia para cuenta Origen, reduce valor**/
 			//Reducir saldo
+			BigDecimal aoSaldo = cta.getSaldo();
 			BigDecimal oSaldo = cta.getSaldo().subtract(costo);
 			cta.setSaldo(oSaldo);
 			mngDAO.actualizar(cta);
@@ -154,20 +155,24 @@ public class ManagerCliente {
 			trans.setTipotran(tp);trans.setMonto(costo);
 			trans.setFecha(new Timestamp(fa.getTime()));
 			trans.setNroCuenta(nroCuentaO);trans.setNrocDestino(nroCuentaD);
-			trans.setSaldoActual(cta.getSaldo());trans.setSaldoFinal(oSaldo);
+			trans.setSaldoActual(aoSaldo);trans.setSaldoFinal(oSaldo);
 			mngDAO.insertar(trans);
 			/**Realiza transferencia para cuenta Destino, aumenta valor**/
 			//Aumentar saldo
+			BigDecimal afSaldo = ctaf.getSaldo();
 			BigDecimal fSaldo = ctaf.getSaldo().add(costo);
 			ctaf.setSaldo(fSaldo);
 			mngDAO.actualizar(ctaf);
 			//Guardar transaccion
-			trans.setNroCuenta(nroCuentaD);trans.setNrocDestino(nroCuentaO);
-			trans.setSaldoActual(ctaf.getSaldo());trans.setSaldoFinal(fSaldo);
-			mngDAO.insertar(trans);
+			Transaccion t = new Transaccion();
+			t.setTipotran(tp);t.setMonto(costo);
+			t.setFecha(new Timestamp(fa.getTime()));
+			t.setNroCuenta(nroCuentaD);t.setNrocDestino(nroCuentaO);
+			t.setSaldoActual(afSaldo);t.setSaldoFinal(fSaldo);
+			mngDAO.insertar(t);
 			//MENSAJES
-			Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
-			Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
+			//Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
+			//Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
 		} catch (Exception e) {
 			throw new Exception("Error: "+e.getMessage()); 
 		}
