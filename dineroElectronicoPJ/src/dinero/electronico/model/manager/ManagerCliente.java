@@ -1,6 +1,7 @@
 package dinero.electronico.model.manager;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -148,7 +149,9 @@ public class ManagerCliente {
 			//Reducir saldo
 			BigDecimal aoSaldo = cta.getSaldo();
 			BigDecimal oSaldo = cta.getSaldo().subtract(costo);
+			oSaldo = oSaldo.setScale(2, RoundingMode.HALF_UP);
 			cta.setSaldo(oSaldo);
+			System.out.println("Cuenta "+cta.getNroCuenta()+" con "+aoSaldo.toString()+" reduce a "+oSaldo.toString());
 			mngDAO.actualizar(cta);
 			//Guardar transaccion
 			Transaccion trans  = new Transaccion();
@@ -161,7 +164,9 @@ public class ManagerCliente {
 			//Aumentar saldo
 			BigDecimal afSaldo = ctaf.getSaldo();
 			BigDecimal fSaldo = ctaf.getSaldo().add(costo);
+			fSaldo = fSaldo.setScale(2, RoundingMode.HALF_UP);
 			ctaf.setSaldo(fSaldo);
+			System.out.println("Cuenta "+ctaf.getNroCuenta()+" con "+afSaldo.toString()+" aumenta a "+fSaldo.toString());
 			mngDAO.actualizar(ctaf);
 			//Guardar transaccion
 			Transaccion t = new Transaccion();
@@ -171,8 +176,8 @@ public class ManagerCliente {
 			t.setSaldoActual(afSaldo);t.setSaldoFinal(fSaldo);
 			mngDAO.insertar(t);
 			//MENSAJES
-			//Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
-			//Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
+			Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
+			Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
 		} catch (Exception e) {
 			throw new Exception("Error: "+e.getMessage()); 
 		}
