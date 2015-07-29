@@ -129,7 +129,7 @@ public class ManagerCliente {
 			Cuenta cta = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaO);
 			Cuenta ctaf = (Cuenta) mngDAO.findById(Cuenta.class, nroCuentaD);
 			String mailo = cta.getCliente().getCorreo();
-			String maild = cta.getCliente().getCorreo();
+			String maild = ctaf.getCliente().getCorreo();
 			//Validar existencia cuenta origen
 			if(cta == null || ctaf == null){
 				throw new Exception("No existe la cuenta"); 
@@ -176,7 +176,7 @@ public class ManagerCliente {
 			t.setSaldoActual(afSaldo);t.setSaldoFinal(fSaldo);
 			mngDAO.insertar(t);
 			//MENSAJES
-			Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" de su cuenta.");
+			Mailer.generateAndSendEmail(maild, "Transferencia exitosa", "Se ha acreditado $"+costo.toString()+" a su cuenta.");
 			Mailer.generateAndSendEmail(mailo, "Transferencia exitosa", "Se ha debitado $"+costo.toString()+" de su cuenta.");
 		} catch (Exception e) {
 			throw new Exception("Error: "+e.getMessage()); 
