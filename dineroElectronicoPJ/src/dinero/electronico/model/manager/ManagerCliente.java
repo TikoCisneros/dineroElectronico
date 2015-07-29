@@ -59,7 +59,7 @@ public class ManagerCliente {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Transaccion> findTransaccionXCuenta(String nrocuenta){
-		List<Transaccion> todos = mngDAO.findAll(Transaccion.class); 
+		List<Transaccion> todos = mngDAO.findAll(Transaccion.class, "o.fecha DESC"); 
 		List<Transaccion> listado = new ArrayList<Transaccion>();
 		for (Transaccion trs : todos) {
 			if(trs.getNroCuenta().equals(nrocuenta)){
