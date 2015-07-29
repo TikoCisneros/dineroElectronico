@@ -85,7 +85,7 @@ public class TransferBean implements Serializable{
 	public String transferir(){
 		try {
 			mngCli.generarTransferencia(sesion.getCedula(),getNroCuentaD(), getToken(), getCosto());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Felicidades" ,"Su transferencia se ha realizado corectamente"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Felicidades" ,"Su transferencia se ha realizado corectamente"));
 			setNroCuentaD("");setToken("");setCosto(null);
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta" ,e.getMessage()));

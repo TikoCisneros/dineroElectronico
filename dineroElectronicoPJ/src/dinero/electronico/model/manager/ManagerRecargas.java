@@ -67,7 +67,7 @@ public class ManagerRecargas {
 		cta.setSaldo(saldo.add(recarga));
 		mngDAO.actualizar(cta);
 		//Tipo de transaccion
-		Tipotran tp = (Tipotran) mngDAO.findById(Tipotran.class, 2);
+		Tipotran tp = (Tipotran) mngDAO.findById(Tipotran.class, 1);
 		Date fa = new Date();
 		Transaccion trans  = new Transaccion();
 		trans.setTipotran(tp);trans.setMonto(recarga);

@@ -1,6 +1,8 @@
 package dinero.electronico.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -19,10 +21,24 @@ public class HistorialBean implements Serializable{
 	private ManagerCliente mngCli;
 	private List<Transaccion> listado;
 	private Cliente session;
+	private BigDecimal saldoActual;
 	
 	public HistorialBean() {
 		mngCli = new ManagerCliente();
 		session = SessionBean.verificarSession("usuario");
+	}
+	
+	
+	/**
+	 * @return saldo actual
+	 */
+	public BigDecimal getSaldoActual() {
+		try {
+			saldoActual = mngCli.saldoActualCuenta(session.getCedula()).setScale(2, RoundingMode.HALF_UP);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return saldoActual;
 	}
 	
 	public Cliente getSession() {

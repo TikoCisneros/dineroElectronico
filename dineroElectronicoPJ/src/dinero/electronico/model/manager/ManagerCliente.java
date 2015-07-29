@@ -117,6 +117,18 @@ public class ManagerCliente {
 	/***********************************TRANSFERENCIA***********************************/
 	
 	/**
+	 * Devuelve el saldo de una cuenta
+	 * @param nrocuenta
+	 * @return
+	 * @throws Exception
+	 */
+	public BigDecimal saldoActualCuenta(String nrocuenta) throws Exception{
+		Cuenta c = (Cuenta) mngDAO.findById(Cuenta.class, nrocuenta);
+		return c.getSaldo();
+	}
+	
+	
+	/**
 	 * Realiza una transferencia de dinero
 	 * @param nroCuentaO cuenta del Cliente quien reduce su monto
 	 * @param nroCuentaD cuenta del Cliente quien aumenta su monto

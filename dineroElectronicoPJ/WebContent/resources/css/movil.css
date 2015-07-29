@@ -8,6 +8,11 @@
 .token{
 	font-size: 600%;
 }
+
+.tittle{
+	color: #2fa4e7;
+	font-size: 20px;
+}
 /***Theme***/
 .panel-primary{border-color:#2fa4e7}
 .panel-primary>.panel-heading {
