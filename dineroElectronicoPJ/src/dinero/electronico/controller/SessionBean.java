@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import dinero.electronico.model.manager.ManagerAdmin;
@@ -139,6 +140,17 @@ public class SessionBean implements Serializable {
             }
         }
     }
+    
+    /**
+     * Mantiene una sesion activa p:poll primefaces
+     */
+    public void keepUserSessionAlive() {
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+	    request.getSession();
+	    System.out.print("Tiempo de expiracion---------------");
+	}
+
     
 }
 
